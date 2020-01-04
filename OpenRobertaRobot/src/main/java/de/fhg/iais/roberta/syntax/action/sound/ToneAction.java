@@ -35,8 +35,8 @@ public class ToneAction<V> extends Action<V> {
     private ToneAction(Expr<V> frequency, Expr<V> duration, String port, BlocklyBlockProperties properties, BlocklyComment comment) {
         super(BlockTypeContainer.getByName("TONE_ACTION"), properties, comment);
         Assert.isTrue(frequency.isReadOnly() && duration.isReadOnly() && (frequency != null) && (duration != null));
-        this.frequency = frequency;
-        this.duration = duration;
+        this.frequency = clampValue(frequency, 0, null);
+        this.duration = clampValue(duration, 0, null);
         this.port = port;
         setReadOnly();
     }
